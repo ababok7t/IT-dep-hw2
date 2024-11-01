@@ -15,11 +15,15 @@ func main() {
 	fmt.Println("Enter file path")
 	_, scanErr := fmt.Scan(&filePath)
 	if scanErr != nil {
-		fmt.Println("scanning error: ", scanErr)
+		fmt.Println("scanning error\n", scanErr)
 		return
 	}
 
-	fileText := file.ReadFile(filePath)
+	fileText, fileErr := file.ReadFile(filePath)
+	if fileErr != nil {
+		fmt.Println("reading error\n", fileErr)
+		return
+	}
 
 	arrayOfShapes := strings.Split(fileText, "\n")
 	var arrayOfCircles []shapes.Circle
@@ -30,7 +34,7 @@ func main() {
 		if n[0] == "circle" {
 			par, err := strconv.ParseFloat(n[1], 64)
 			if err != nil {
-				fmt.Println("parse error: ", par)
+				fmt.Println("parse error\n", par)
 				return
 			}
 			shape := shapes.Circle{Radius: par}
@@ -39,17 +43,23 @@ func main() {
 		if n[0] == "rectangle" {
 			par1, err1 := strconv.ParseFloat(n[1], 64)
 			if err1 != nil {
-				fmt.Println("parse error: ", par1)
+				fmt.Println("parse error\n", par1)
 				return
 			}
 			par2, err2 := strconv.ParseFloat(n[2], 64)
 			if err2 != nil {
-				fmt.Println("parse error: ", par2)
+				fmt.Println("parse error\n", par2)
 				return
 			}
 			shape := shapes.Rectangle{Width: par1, Height: par2}
 			arrayOfRectangles = append(arrayOfRectangles, shape)
 		}
 	}
-	fmt.Println(calculator.TotalArea(arrayOfCircles, arrayOfRectangles))
+
+	totalArea, totalAreaErr := calculator.TotalArea(arrayOfCircles, arrayOfRectangles)
+	if totalAreaErr != nil {
+		fmt.Println(totalAreaErr)
+		return
+	}
+	fmt.Println(totalArea)
 }

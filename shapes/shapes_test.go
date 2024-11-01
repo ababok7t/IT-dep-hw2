@@ -12,7 +12,7 @@ func TestCircle1(t *testing.T) {
 	actual, err := circle.GetArea()
 
 	if err != nil {
-		t.Error("error: " + err.Error())
+		t.Error(err.Error())
 	}
 
 	if actual != expected {
@@ -22,12 +22,12 @@ func TestCircle1(t *testing.T) {
 
 func TestCircle2(t *testing.T) {
 	radius := -5.
-	expected := math.Pi * radius * radius
+	expected := 0.
 	circle := Circle{Radius: radius}
 	actual, err := circle.GetArea()
 
-	if err != nil {
-		t.Error("error: " + err.Error())
+	if err == nil {
+		t.Error("expected error")
 	}
 
 	if actual != expected {
@@ -37,12 +37,12 @@ func TestCircle2(t *testing.T) {
 
 func TestCircle3(t *testing.T) {
 	radius := 0.
-	expected := math.Pi * radius * radius
+	expected := 0.
 	circle := Circle{Radius: radius}
 	actual, err := circle.GetArea()
 
-	if err != nil {
-		t.Error("error: " + err.Error())
+	if err == nil {
+		t.Error("expected error")
 	}
 
 	if actual != expected {
@@ -69,12 +69,12 @@ func TestRectangle1(t *testing.T) {
 func TestRectangle2(t *testing.T) {
 	width := 7.
 	height := -8.
-	expected := width * height
+	expected := 0.
 	rectangle := Rectangle{Width: width, Height: height}
 	actual, err := rectangle.GetArea()
 
-	if err != nil {
-		t.Error("error: " + err.Error())
+	if err == nil {
+		t.Error("expected error")
 	}
 
 	if actual != expected {
@@ -85,12 +85,12 @@ func TestRectangle2(t *testing.T) {
 func TestRectangle3(t *testing.T) {
 	width := -9.
 	height := 2.
-	expected := width * height
+	expected := 0.
 	rectangle := Rectangle{Width: width, Height: height}
 	actual, err := rectangle.GetArea()
 
-	if err != nil {
-		t.Error("error: " + err.Error())
+	if err == nil {
+		t.Error("expected error")
 	}
 
 	if actual != expected {
@@ -101,12 +101,12 @@ func TestRectangle3(t *testing.T) {
 func TestRectangle4(t *testing.T) {
 	width := 0.
 	height := 0.
-	expected := width * height
+	expected := 0.
 	rectangle := Rectangle{Width: width, Height: height}
 	actual, err := rectangle.GetArea()
 
-	if err != nil {
-		t.Error("error: " + err.Error())
+	if err == nil {
+		t.Error("expected error")
 	}
 
 	if actual != expected {

@@ -1,23 +1,20 @@
 package file
 
 import (
-	"fmt"
 	"os"
 )
 
-func ReadFile(path string) string {
+func ReadFile(path string) (string, error) {
 	inputFile, inputErr := os.Open(path)
 	if inputErr != nil {
-		fmt.Println("input error: ", inputErr)
-		return "input error: " + inputErr.Error()
+		return "", inputErr
 	}
 	defer inputFile.Close()
 	data := make([]byte, 1024)
 	readingByte, readingErr := inputFile.Read(data)
 	if readingErr != nil {
-		fmt.Println("reading error: ", readingByte)
-		return "reading error: " + readingErr.Error()
+		return "", readingErr
 	}
 	text := string(data[:readingByte])
-	return text
+	return text, nil
 }
